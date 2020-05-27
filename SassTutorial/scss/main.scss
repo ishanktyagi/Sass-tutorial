@@ -1,0 +1,77 @@
+// Importing partials
+@import "./resets";
+@import "./variables";
+
+// Function
+@function weight($weight-name) {
+  @return map-get($map: $font-weights, $key: $weight-name);
+}
+body {
+  background: $primary-color;
+  color: $text-color;
+  // font-weight: map-get($font-weights, medium);
+}
+
+// Mixin
+// Code which  is used repeatedly
+@mixin flexCenter($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin theme($light-theme: true) {
+  @if $light-theme {
+    background: lighten($color: $primary-color, $amount: 100%);
+    color: darken($color: $text-color, $amount: 100%);
+  }
+}
+
+@mixin mobile {
+  @media (max-width: $mobile) {
+    @content;
+  }
+}
+//Function should computed values, Mixin should define style
+
+// Nesting
+.main {
+  @include flexCenter(row);
+  width: 100%-20%;
+  // width: 100%-20px;  can't mix types;
+  margin: 0 auto;
+
+  // & equals to parent
+  // &-paragraph {
+  //   font-weight: map-get($font-weights, regular);
+  //   font-size: 1.2rem;
+  // }
+
+  // Interpolation
+  // for within parent css generation
+  #{&}-paragraph1 {
+    font-weight: weight(bold);
+    font-size: 1.2rem;
+
+    &:hover {
+      color: goldenrod;
+    }
+  }
+
+  #{&}-paragraph2 {
+    @extend .main-paragraph1;
+
+    &:hover {
+      color: $accent-color;
+    }
+  }
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.light {
+  @include theme($light-theme: true);
+}

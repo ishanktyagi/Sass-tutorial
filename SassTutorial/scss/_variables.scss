@@ -1,0 +1,15 @@
+// Sass Partial
+
+// Variables
+// Sass variables compile to actual value not to css variable provinding 100% browser compatibility
+$primary-color: #272727;
+$accent-color: #ff652f;
+$text-color: #fff;
+$mobile: 800px;
+
+// Map
+$font-weights: (
+  "regular": 300,
+  "medium": 500,
+  "bold": 700,
+);
